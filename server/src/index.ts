@@ -1,5 +1,6 @@
 import express, {Application} from 'express';
-
+import indexRoutes from  './routes/indexRoutes';
+import gamesRoutes from './routes/gamesRoutes';
 
 class Server{
 
@@ -11,10 +12,11 @@ class Server{
         this.routes();
     }
     config(): void {
-        this.app.set('port',process.env.PORT || 3000);
+        this.app.set('port', process.env.PORT || 3000);
     }
     routes(): void{
-
+        this.app.use(indexRoutes);
+        this.app.use('/api/games',gamesRoutes);
     }
 
     start(): void{
@@ -25,3 +27,4 @@ class Server{
 }
 
 const server = new Server();
+server.start();
