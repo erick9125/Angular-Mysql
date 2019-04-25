@@ -1,8 +1,8 @@
 import {Request,Response} from 'express';
 
 class IndexController{
-    index (req: Request,res: Response){
-        res.send('funcionando')
+   public index (req: Request,res: Response){
+        res.json({text: 'API esta /api/games'});
     }
 }
 

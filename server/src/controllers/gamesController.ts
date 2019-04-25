@@ -1,8 +1,11 @@
 import {Request,Response} from 'express';
 
+import pool from '../database';
+
 class GamesController{
     index (req: Request,res: Response){
-        res.send('funcionando Games')
+        pool.query('DESCRIBE juegos')
+        res.json('funcionando Games')
     }
 }
 
