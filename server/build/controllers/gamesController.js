@@ -23,21 +23,31 @@ class GamesController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const juegos = yield database_1.default.query('SELECT * FROM juegos WHERE id = ?', [id]);
-            console.log(juegos);
-            res.json({ text: 'Juego Encontrado' });
+            if (juegos.length > 0) {
+                return res.json(juegos[0]);
+            }
+            res.status(404).json({ text: "El juego no existe" });
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO games set ?', [req.body]);
+            yield database_1.default.query('INSERT INTO juegos set ?', [req.body]);
             res.json({ message: 'Juego Guardado' });
         });
     }
     delete(req, res) {
-        res.json({ text: 'Eliminando un juego ' + req.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('DELETE FROM juegos WHERE id = ?', [id]);
+            res.json({ message: 'Juego Eliminado' });
+        });
     }
     update(req, res) {
-        res.json({ text: 'Actualizando el juego ' + req.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('UPDATE juegos set ? WHERE id = ?', [req.body, id]);
+            res.json({ message: 'El juego fue actualizado correctamente' });
+        });
     }
 }
 const gamesController = new GamesController();

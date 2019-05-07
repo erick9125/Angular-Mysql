@@ -8,24 +8,31 @@ class GamesController{
       res.json(juegos);
     }
 
-    public async getOne (req: Request, res: Response): Promise<void>{
+    public async getOne (req: Request, res: Response): Promise<any>{
         const {id} = req.params;
         const juegos = await pool.query('SELECT * FROM juegos WHERE id = ?', [id]);
-        console.log(juegos);
-        res.json({text: 'Juego Encontrado'});
+        if (juegos.length > 0){
+            return res.json(juegos[0]);
+        }
+        res.status(404).json({text: "El juego no existe"});
+        
     }
 
     public async create (req: Request, res: Response): Promise<void>{
-        await pool.query('INSERT INTO games set ?', [req.body]);
+        await pool.query('INSERT INTO juegos set ?', [req.body]);
         res.json({message: 'Juego Guardado'});
     }
 
-    public delete (req: Request, res: Response){
-        res.json({text: 'Eliminando un juego ' + req.params.id});
+    public async delete (req: Request, res: Response): Promise<void>{
+        const {id} = req.params;
+        await pool.query('DELETE FROM juegos WHERE id = ?',[id]);
+        res.json({message: 'Juego Eliminado'});
     }
 
-    public update (req: Request, res: Response){
-        res.json({text: 'Actualizando el juego ' + req.params.id})
+    public async update (req: Request, res: Response): Promise<void>{
+        const {id} = req.params;
+        await pool.query('UPDATE juegos set ? WHERE id = ?',[req.body, id]);
+        res.json({message: 'El juego fue actualizado correctamente'})
     }
 
 }
