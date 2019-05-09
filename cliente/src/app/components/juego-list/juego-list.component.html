@@ -1,8 +1,8 @@
-<div class="col-md-4" *ngFor="let juego of juegos">
+<div class="col-md-4 my-4" *ngFor="let juego of juegos">
     <div class="card text-center">
       <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
         {{juego.titulo}}
-        <button class="btn btn-danger">
+        <button class="btn btn-danger" (click)="eliminarJuego(juego.id)">
           <i class="far fa-trash-alt"></i>
         </button>
       </div>

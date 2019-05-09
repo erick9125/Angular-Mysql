@@ -15,9 +15,23 @@ export class JuegoListComponent implements OnInit {
   constructor(private juegoService: JuegosService) { }
 
   ngOnInit() {
+    this.getJuegos();
+  }
+
+  getJuegos(){
     this.juegoService.getJuegos().subscribe(
       res=> {
         this.juegos = res;
+      },
+      err => console.error(err)
+    );
+  }
+
+  eliminarJuego(id: string){
+    this.juegoService.deleteJuego(id).subscribe(
+      res => {
+        console.log(res);
+        this.getJuegos();
       },
       err => console.error(err)
     )
