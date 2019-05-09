@@ -34,7 +34,9 @@ export class JuegoListComponent implements OnInit {
         this.getJuegos();
       },
       err => console.error(err)
-    )
+    );
   }
+
+
 
 }

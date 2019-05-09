@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Juego } from 'src/app/models/Juego';
 import { JuegosService } from '../../services/juegos.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-juego-form',
@@ -19,9 +20,23 @@ juego: Juego = {
   created_at: new Date()
 };
 
-  constructor(private juegoService: JuegosService) { }
+  edit: boolean = false;
+
+  constructor(private juegoService: JuegosService , private router: Router, private activedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    const params = this.activedRoute.snapshot.params;
+    if(params.id){
+      this.juegoService.getJuego(params.id)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.juego = res;
+            this.edit = true;
+          },
+          err => console.error(err)
+        )
+    }
   }
 
   guardarNuevoJuego(){
@@ -32,9 +47,21 @@ juego: Juego = {
       .subscribe(
         res => {
           console.log(res);
+          this.router.navigate(['/games']);
         },
         err => console.error(err)
       )
     }
 
+    actualizarJuego(){
+      delete this.juego.created_at;
+      this.juegoService.updateJuego(this.juego.id, this.juego)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['/games']);
+          },
+          err => console.log(err)
+        )
+    }
 }

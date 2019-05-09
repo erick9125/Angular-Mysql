@@ -12,7 +12,7 @@
           <div class="from-group mt-4">
             <input type="url" name="imagen" [(ngModel)]="juego.imagen" placeholder="Ingresa una URL de imagen" class="form-control" >
           </div>
-          <button class="btn btn-success btn-block mt-4" (click)="guardarNuevoJuego()">
+          <button class="btn btn-success btn-block mt-4" (click)="edit ? actualizarJuego() : guardarNuevoJuego()">
             Guardar
           </button>
         </form>

@@ -29,7 +29,7 @@ export class JuegosService {
     return this.http.post(`${this.API_URI}/games`, juego);
   }
 
-  updateJuego(id: string, updateJuego: Juego): Observable<Juego>{
+  updateJuego(id: string|number, updateJuego: Juego): Observable<Juego>{
     return this.http.put(`${this.API_URI}/games/${id}`, updateJuego);
   }
 
