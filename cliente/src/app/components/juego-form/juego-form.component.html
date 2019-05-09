@@ -1,3 +1,22 @@
-<p>
-  juego-form works!
-</p>
+
+  <div class="col-md-4 offset-md-4">
+    <div class="card">
+      <div class="card-body">
+        <form >
+          <div class="from-group">
+            <input type="text" name="titulo" [(ngModel)]="juego.titulo" placeholder="Ingresa un titulo" class="form-control" autofocus>
+          </div>
+          <div class="from-group mt-4">
+            <textarea  name="descripcion" [(ngModel)]="juego.descripcion" rows="2" placeholder="Ingresa la descripción del juego" class="form-control" ></textarea>
+          </div>
+          <div class="from-group mt-4">
+            <input type="url" name="imagen" [(ngModel)]="juego.imagen" placeholder="Ingresa una URL de imagen" class="form-control" >
+          </div>
+          <button class="btn btn-success btn-block mt-4" (click)="guardarNuevoJuego()">
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+

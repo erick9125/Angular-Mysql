@@ -1,10 +1,15 @@
 <div class="col-md-4" *ngFor="let juego of juegos">
     <div class="card text-center">
-      <div class="card-header">
+      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
         {{juego.titulo}}
+        <button class="btn btn-danger">
+          <i class="far fa-trash-alt"></i>
+        </button>
       </div>
+      <img [src]="juego.imagen" class="card-img-top">
       <div class="card-body">
-
+          <p>{{juego.descripcion}}</p>
+          <a href="" class="btn btn-info btn-block">Editar Juego</a>
       </div>
     </div>
 </div>
